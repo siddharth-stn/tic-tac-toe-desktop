@@ -2,6 +2,8 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Kaushan+Script&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Kaushan+Script&family=Roboto:wght@300&display=swap');
+
 * {
     box-sizing: border-box;
     margin: 0px;
@@ -13,6 +15,88 @@ body {
 }
 
 @media (max-width: 414px) {
+
+    .blur {
+        background-image: url(static/blur.png);
+        background-repeat: no-repeat;
+        background-size: 60vh;
+        height: 100vh;
+        width: 100vw;
+        filter: blur(7px);
+        z-index: 1;
+        position: absolute; 
+    }
+
+    #player-info-form {
+        position: absolute;
+        top: 110px;
+        left: 20px;
+        border: black solid 1px;
+        border-radius: 5%;
+        padding-top: 20px;
+        padding-bottom: 50px;
+        padding-left: 10px;
+        padding-right: 10px;
+        height: 500px;
+        width: 90%;
+        z-index: 2;
+        background: rgba(169, 106, 67, 0.564);
+        display: flex;
+        flex-direction: column;
+        font-size: 1.9rem;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    #player-info-form div:first-child {
+        padding-bottom: 20px;
+    }
+
+    #player-info-form div:nth-child(2) {
+        padding-bottom: 20px;
+    }
+
+    #player-info-form input {
+        width: 90%;
+        font-size: 1.5rem;
+    }
+
+    #player-info-form div:last-child {
+        text-align: center;
+    }
+
+    .symbol-font {
+        font-family: 'Kaushan Script', cursive;
+    }
+
+    #choose-symbol {
+        padding-top: 20px;
+        margin: auto;
+        font-size: 3rem;
+        width: 70%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    #choose-symbol p:first-child {
+        border: 1px solid black;
+        background-color: white;
+        padding-left: 15px;
+        padding-right: 20px;
+    }
+
+    #choose-symbol p:last-child {
+        border: 1px solid black;
+        background-color: white;
+        padding-left: 15px;
+        padding-right: 20px;
+    }
+
+    div > button {
+        margin-top: 30px;
+        font-size: 1.7rem;
+        font-family: 'Architects Daughter';
+    }
 
     header {
         width: 100%;
