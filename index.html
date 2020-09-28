@@ -14,56 +14,47 @@
     <div id="blur-div" class="blur"></div>
 
     <div id="player-info-form">
-       <div><label for="player1">Player One Name:</label><input type="text" id="player1" name="player1"></div>
-       <div><label for="player2">Player Two Name:</label> <input type="text" id="player2" name="player1"></div>
+       <div><label for="player1">Player one nick name:</label><input type="text" id="player-one-input" name="player-one-input" maxlength="9" onkeypress="return AvoidSpaceAndNumbers(event)"></div>
+       <div><label for="player2">Player two nick name:</label> <input type="text" id="player-two-input" name="player-two-input" maxlength="9" onkeypress="return AvoidSpaceAndNumbers(event)"></div>
 
        <div>Player One tap to choose either <span class="symbol-font">X&nbsp;</span> or <span class="symbol-font">O&nbsp;</span> from below. </div>
        
         <div id="choose-symbol">
-            <p class="symbol-font">X</p>
-            <p class="symbol-font">O</p>
+            <p class="symbol-font" id="chooseX">X</p>
+            <p class="symbol-font" id="chooseO">O</p>
         </div>
 
-        <div><button>Let's Play</button></div>
+        <div><button id="letsPlayBtn">Let's Play</button></div>
     </div>
 
     <main>
         <div id="grid-container">
 
             <div id="cell-one-one" class="cells">
-               X
             </div>
 
             <div id="cell-one-two" class="cells">
-                O
             </div>
 
             <div id="cell-one-three" class="cells">
-                O
             </div>
 
             <div id="cell-two-one" class="cells">
-                O
             </div>
 
             <div id="cell-two-two" class="cells">
-                X
             </div>
 
             <div id="cell-two-three" class="cells">
-                O
             </div>
 
             <div id="cell-three-one" class="cells">
-                O
             </div>
 
             <div id="cell-three-two" class="cells">
-                O
             </div>
 
             <div id="cell-three-three" class="cells">
-                X
             </div>
         </div>   <!-- grid container end -->
 

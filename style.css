@@ -29,21 +29,21 @@ body {
 
     #player-info-form {
         position: absolute;
-        top: 110px;
+        top: 120px;
         left: 20px;
         border: black solid 1px;
         border-radius: 5%;
         padding-top: 20px;
-        padding-bottom: 50px;
-        padding-left: 10px;
-        padding-right: 10px;
-        height: 500px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+        height: auto;
         width: 90%;
         z-index: 2;
         background: rgba(169, 106, 67, 0.564);
         display: flex;
         flex-direction: column;
-        font-size: 1.9rem;
+        font-size: 1.5rem;
         font-family: 'Roboto', sans-serif;
     }
 
@@ -55,9 +55,16 @@ body {
         padding-bottom: 20px;
     }
 
-    #player-info-form input {
+    #player-info-form div:nth-child(2) input{
         width: 90%;
         font-size: 1.5rem;
+    }
+
+    #player-info-form input{ /* first input box */
+        width: 90%;
+        font-size: 1.5rem;
+        padding-bottom: 0px;
+        padding-top: 0px;
     }
 
     #player-info-form div:last-child {
@@ -69,7 +76,7 @@ body {
     }
 
     #choose-symbol {
-        padding-top: 20px;
+        padding-top: 15px;
         margin: auto;
         font-size: 3rem;
         width: 70%;
@@ -120,6 +127,7 @@ body {
     #grid-container {
         text-align: center;
         margin-top: 50px;
+        min-height: 32vh;
         max-height: 50vh;
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
@@ -176,7 +184,7 @@ body {
         margin-top: 40px;
         width: auto;
         text-align: center;
-        font-size: 3.4em;
+        font-size: 3.2em;
         font-family: 'Architects Daughter';
     }
 
