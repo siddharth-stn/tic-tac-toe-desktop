@@ -106,7 +106,7 @@ let cellTwoThree = document.getElementById("cell-two-three");
 let cellThreeOne = document.getElementById("cell-three-one");
 let cellThreeTwo = document.getElementById("cell-three-two");
 let cellThreeThree = document.getElementById("cell-three-three");
-
+let playAgainBtn = document.getElementById("playAgainBtn");
 
 //initialize a varibale that stores the player symbol which is to 
 //be put on the board when mouse left button is clicked
@@ -172,9 +172,11 @@ container.addEventListener('click', (event) => {
                                 if (winSymbol == playerOneChoice) {
                                     resultFlag.innerHTML = `${playerOneName} wins!`
                                     stop = false;
+                                    playAgainBtn.style.display = "block";
                                 } else {
                                     resultFlag.innerHTML = `${playerTwoName} wins!`
                                     stop = false;
+                                    playAgainBtn.style.display = "block";
                                 }
                             } else {
                                 resultFlag.innerHTML = `${playerTwoName}'s turn`;
@@ -188,9 +190,11 @@ container.addEventListener('click', (event) => {
                                 if (winSymbol == playerOneChoice) {
                                     resultFlag.innerHTML = `${playerOneName} wins!`
                                     stop = false;
+                                    playAgainBtn.style.display = "block";
                                 } else {
                                     resultFlag.innerHTML = `${playerTwoName} wins!`
                                     stop = false;
+                                    playAgainBtn.style.display = "block";
                                 }
                             } else {
                                 resultFlag.innerHTML = `${playerOneName}'s turn`
@@ -205,12 +209,15 @@ container.addEventListener('click', (event) => {
                                 if (winSymbol == playerOneChoice) {
                                     resultFlag.innerHTML = `${playerOneName} wins!`
                                     stop = false;
+                                    playAgainBtn.style.display = "block";
                                 } else {
                                     resultFlag.innerHTML = `${playerTwoName} wins!`
                                     stop = false;
+                                    playAgainBtn.style.display = "block";
                                 }
                             } else {
                                 resultFlag.innerHTML = "Game Draw!";
+                                playAgainBtn.style.display = "block";
                             }
                         } else {
                             mouseClickSymbol = playerTwoChoice;
@@ -220,12 +227,15 @@ container.addEventListener('click', (event) => {
                                 if (winSymbol == playerOneChoice) {
                                     resultFlag.innerHTML = `${playerOneName} wins!`
                                     stop = false;
+                                    playAgainBtn.style.display = "block";
                                 } else {
                                     resultFlag.innerHTML = `${playerTwoName} wins!`
                                     stop = false;
+                                    playAgainBtn.style.display = "block";
                                 }
                             } else {
                                 resultFlag.innerHTML = "Game Draw!";
+                                playAgainBtn.style.display = "block";
                             }
                         }
                     }
@@ -235,4 +245,8 @@ container.addEventListener('click', (event) => {
     }
 });
       
+//code for Play Again Button
+playAgainBtn.addEventListener ('click', () => {
+    location.reload();
+});
 

@@ -188,4 +188,8 @@ body {
         font-family: 'Architects Daughter';
     }
 
+    #playAgainBtn {
+        margin-left: 100px;
+        display: none;
+    }
 }
