@@ -1,3 +1,13 @@
+//initialize sounds to play during the game and after win and after draw
+let clickSound = new Audio();
+clickSound.src = "static/clickSound.mp3";
+
+let winSound = new Audio();
+winSound.src = "static/cheerSound.mp3";
+
+let drawSound = new Audio();
+drawSound.src = "static/drawSound.mp3";
+
 //initialized the different elements of the GUI for that is
 //being viewed during the start of the application 
 const blurWrap = document.getElementById("blur-div");
@@ -150,7 +160,7 @@ function winCheck () {
             winSymbol = cellOneOne.innerHTML;
             break;
         default:
-            winSymbol = "NOPE"
+            winSymbol = "NOPE";
             break;
     }
 }
@@ -163,6 +173,7 @@ container.addEventListener('click', (event) => {
             if (item.innerHTML != "X" && item.innerHTML != "O") {
                 if (event.target == item) {
                     if (controlVariable <= 8) {
+                        clickSound.play();
                         controlVariable++;
                         if (resultFlag.innerHTML == `${playerOneName}'s turn`) {
                             mouseClickSymbol = playerOneChoice;
@@ -170,11 +181,13 @@ container.addEventListener('click', (event) => {
                             winCheck();
                             if (winSymbol != "NOPE") {
                                 if (winSymbol == playerOneChoice) {
-                                    resultFlag.innerHTML = `${playerOneName} wins!`
+                                    resultFlag.innerHTML = `${playerOneName} wins!`;
+                                    winSound.play();
                                     stop = false;
                                     playAgainBtn.style.display = "block";
                                 } else {
-                                    resultFlag.innerHTML = `${playerTwoName} wins!`
+                                    resultFlag.innerHTML = `${playerTwoName} wins!`;
+                                    winSound.play();
                                     stop = false;
                                     playAgainBtn.style.display = "block";
                                 }
@@ -188,11 +201,13 @@ container.addEventListener('click', (event) => {
                             winCheck();
                             if (winSymbol != "NOPE") {
                                 if (winSymbol == playerOneChoice) {
-                                    resultFlag.innerHTML = `${playerOneName} wins!`
+                                    resultFlag.innerHTML = `${playerOneName} wins!`;
+                                    winSound.play();
                                     stop = false;
                                     playAgainBtn.style.display = "block";
                                 } else {
-                                    resultFlag.innerHTML = `${playerTwoName} wins!`
+                                    resultFlag.innerHTML = `${playerTwoName} wins!`;
+                                    winSound.play();
                                     stop = false;
                                     playAgainBtn.style.display = "block";
                                 }
@@ -202,39 +217,49 @@ container.addEventListener('click', (event) => {
                         }
                     } else {
                         if (resultFlag.innerHTML == `${playerOneName}'s turn`) {
+                            clickSound.play();
                             mouseClickSymbol = playerOneChoice;
                             item.innerHTML = mouseClickSymbol;
                             winCheck();
                             if (winSymbol != "NOPE") {
                                 if (winSymbol == playerOneChoice) {
-                                    resultFlag.innerHTML = `${playerOneName} wins!`
+                                    resultFlag.innerHTML = `${playerOneName} wins!`;
+                                    winSound.play();
                                     stop = false;
                                     playAgainBtn.style.display = "block";
                                 } else {
-                                    resultFlag.innerHTML = `${playerTwoName} wins!`
+                                    resultFlag.innerHTML = `${playerTwoName} wins!`;
+                                    winSound.play();
                                     stop = false;
                                     playAgainBtn.style.display = "block";
                                 }
                             } else {
+                                clickSound.play();
                                 resultFlag.innerHTML = "Game Draw!";
+                                drawSound.play();
                                 playAgainBtn.style.display = "block";
                             }
                         } else {
                             mouseClickSymbol = playerTwoChoice;
                             item.innerHTML = mouseClickSymbol;
+                            clickSound.play()
                             winCheck();
                             if (winSymbol != "NOPE") {
                                 if (winSymbol == playerOneChoice) {
                                     resultFlag.innerHTML = `${playerOneName} wins!`
+                                    winSound.play();
                                     stop = false;
                                     playAgainBtn.style.display = "block";
                                 } else {
                                     resultFlag.innerHTML = `${playerTwoName} wins!`
+                                    winSound.play();
                                     stop = false;
                                     playAgainBtn.style.display = "block";
                                 }
                             } else {
+                                clickSound.play()
                                 resultFlag.innerHTML = "Game Draw!";
+                                drawSound.play();
                                 playAgainBtn.style.display = "block";
                             }
                         }
