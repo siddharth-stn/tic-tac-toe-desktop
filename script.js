@@ -160,71 +160,73 @@ function winCheck () {
 container.addEventListener('click', (event) => {
     if (stop) {
         cells.forEach((item) => {
-            if (event.target == item) {
-                if (controlVariable <= 8) {
-                    controlVariable++;
-                    if (resultFlag.innerHTML == `${playerOneName}'s turn`) {
-                        mouseClickSymbol = playerOneChoice;
-                        item.innerHTML = mouseClickSymbol;
-                        winCheck();
-                        if (winSymbol != "NOPE") {
-                            if (winSymbol == playerOneChoice) {
-                                resultFlag.innerHTML = `${playerOneName} wins!`
-                                stop = false;
+            if (item.innerHTML != "X" && item.innerHTML != "O") {
+                if (event.target == item) {
+                    if (controlVariable <= 8) {
+                        controlVariable++;
+                        if (resultFlag.innerHTML == `${playerOneName}'s turn`) {
+                            mouseClickSymbol = playerOneChoice;
+                            item.innerHTML = mouseClickSymbol;
+                            winCheck();
+                            if (winSymbol != "NOPE") {
+                                if (winSymbol == playerOneChoice) {
+                                    resultFlag.innerHTML = `${playerOneName} wins!`
+                                    stop = false;
+                                } else {
+                                    resultFlag.innerHTML = `${playerTwoName} wins!`
+                                    stop = false;
+                                }
                             } else {
-                                resultFlag.innerHTML = `${playerTwoName} wins!`
-                                stop = false;
+                                resultFlag.innerHTML = `${playerTwoName}'s turn`;
                             }
+                            
                         } else {
-                            resultFlag.innerHTML = `${playerTwoName}'s turn`;
-                        }
-                        
-                    } else {
-                        mouseClickSymbol = playerTwoChoice;
-                        item.innerHTML = mouseClickSymbol;
-                        winCheck();
-                        if (winSymbol != "NOPE") {
-                            if (winSymbol == playerOneChoice) {
-                                resultFlag.innerHTML = `${playerOneName} wins!`
-                                stop = false;
+                            mouseClickSymbol = playerTwoChoice;
+                            item.innerHTML = mouseClickSymbol;
+                            winCheck();
+                            if (winSymbol != "NOPE") {
+                                if (winSymbol == playerOneChoice) {
+                                    resultFlag.innerHTML = `${playerOneName} wins!`
+                                    stop = false;
+                                } else {
+                                    resultFlag.innerHTML = `${playerTwoName} wins!`
+                                    stop = false;
+                                }
                             } else {
-                                resultFlag.innerHTML = `${playerTwoName} wins!`
-                                stop = false;
+                                resultFlag.innerHTML = `${playerOneName}'s turn`
                             }
-                        } else {
-                            resultFlag.innerHTML = `${playerOneName}'s turn`
-                        }
-                    }
-                } else {
-                    if (resultFlag.innerHTML == `${playerOneName}'s turn`) {
-                        mouseClickSymbol = playerOneChoice;
-                        item.innerHTML = mouseClickSymbol;
-                        winCheck();
-                        if (winSymbol != "NOPE") {
-                            if (winSymbol == playerOneChoice) {
-                                resultFlag.innerHTML = `${playerOneName} wins!`
-                                stop = false;
-                            } else {
-                                resultFlag.innerHTML = `${playerTwoName} wins!`
-                                stop = false;
-                            }
-                        } else {
-                            resultFlag.innerHTML = "Game Draw!";
                         }
                     } else {
-                        mouseClickSymbol = playerTwoChoice;
-                        item.innerHTML = mouseClickSymbol;
-                        winCheck();
-                        if (winSymbol != "NOPE") {
-                            if (winSymbol == playerOneChoice) {
-                                resultFlag.innerHTML = `${playerOneName} wins!`
-                                stop = false;
+                        if (resultFlag.innerHTML == `${playerOneName}'s turn`) {
+                            mouseClickSymbol = playerOneChoice;
+                            item.innerHTML = mouseClickSymbol;
+                            winCheck();
+                            if (winSymbol != "NOPE") {
+                                if (winSymbol == playerOneChoice) {
+                                    resultFlag.innerHTML = `${playerOneName} wins!`
+                                    stop = false;
+                                } else {
+                                    resultFlag.innerHTML = `${playerTwoName} wins!`
+                                    stop = false;
+                                }
                             } else {
-                                resultFlag.innerHTML = `${playerTwoName} wins!`
-                                stop = false;
+                                resultFlag.innerHTML = "Game Draw!";
                             }
                         } else {
-                            resultFlag.innerHTML = "Game Draw!";
+                            mouseClickSymbol = playerTwoChoice;
+                            item.innerHTML = mouseClickSymbol;
+                            winCheck();
+                            if (winSymbol != "NOPE") {
+                                if (winSymbol == playerOneChoice) {
+                                    resultFlag.innerHTML = `${playerOneName} wins!`
+                                    stop = false;
+                                } else {
+                                    resultFlag.innerHTML = `${playerTwoName} wins!`
+                                    stop = false;
+                                }
+                            } else {
+                                resultFlag.innerHTML = "Game Draw!";
+                            }
                         }
                     }
                 }
