@@ -1,0 +1,21 @@
+@use "var";
+
+
+// Normalize Some CSS basics
+*,
+*::after, 
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 20% 1fr;
+    grid-template-rows: max(10%, 150px) 1fr;
+    .header {
+        background-color: var.$color-brown;
+        grid-column: span 2;
+    }
+}

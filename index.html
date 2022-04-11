@@ -2,85 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Tic-Tac-Toe</title>
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./script.js" defer></script>
 </head>
 <body>
-    <header>
-        <h1>Tic-Tac-Toe</h1>
-    </header>
-
-    <div id="blur-div" class="blur"></div>
-
-    <div id="player-info-form">
-       <div><label for="player1">Player one nick name:</label><input type="text" id="player-one-input" name="player-one-input" maxlength="9" onkeypress="return AvoidSpaceAndNumbers(event)"></div>
-       <div><label for="player2">Player two nick name:</label> <input type="text" id="player-two-input" name="player-two-input" maxlength="9" onkeypress="return AvoidSpaceAndNumbers(event)"></div>
-
-       <div>Player One tap to choose either <span class="symbol-font">X&nbsp;</span> or <span class="symbol-font">O&nbsp;</span> from below. </div>
-       
-        <div id="choose-symbol">
-            <p class="symbol-font" id="chooseX">X</p>
-            <p class="symbol-font" id="chooseO">O</p>
+    <div class="container">
+        <div class="header"> Tic - Tac - Toe</div>
+        <div class="sideLeft"></div>
+        <div class="main">
+            <div class="cell1"></div>
+            <div class="cell2"></div>
+            <div class="cell3"></div>
+            <div class="cell4"></div>
+            <div class="cell5"></div>
+            <div class="cell6"></div>
+            <div class="cell7"></div>
+            <div class="cell8"></div>
+            <div class="cell9"></div>
         </div>
-
-        <div><button id="letsPlayBtn">Let's Play</button></div>
     </div>
 
-    <main>
-        <div id="grid-container">
-
-            <div id="cell-one-one" class="cells">
-            </div>
-
-            <div id="cell-one-two" class="cells">
-            </div>
-
-            <div id="cell-one-three" class="cells">
-            </div>
-
-            <div id="cell-two-one" class="cells">
-            </div>
-
-            <div id="cell-two-two" class="cells">
-            </div>
-
-            <div id="cell-two-three" class="cells">
-            </div>
-
-            <div id="cell-three-one" class="cells">
-            </div>
-
-            <div id="cell-three-two" class="cells">
-            </div>
-
-            <div id="cell-three-three" class="cells">
-            </div>
-        </div>   <!-- grid container end -->
-
-        <div id="game-info"> <!-- game information div start-->
-
-            <div id="player-one">
-                <p>Player 1</p>
-                <p><span class="chosen-symbol-style">(X)</span></p>
-            </div>
-            
-            <div id="player-two">
-                <p>Player 2</p>
-                <p><span class="chosen-symbol-style">(O)</span></p>
-            </div>
-            
-        </div> <!-- game info div end-->
-
-        <div id="result-div"> <!-- result div start-->
-
-            <p id='result-para'>Player 1 Wins!</p>
-
-        </div> <!-- result div end-->
-        <div><button id="playAgainBtn">Play Again</button></div>
-    </main>
-
-
-    <script src="script.js"></script>
 </body>
 </html>
