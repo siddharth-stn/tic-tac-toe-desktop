@@ -10,8 +10,10 @@
 .container {
   height: 100vh;
   display: grid;
-  grid-template-columns: 20% 1fr;
+  grid-template-columns: 0px 1fr;
   grid-template-rows: max(10%, 120px) 1fr;
+  padding: 0 0;
+  max-width: 100%;
 }
 .container .header {
   display: flex;
@@ -64,6 +66,55 @@
 .container .main .play-grid .cell7 {
   border-left: none;
 }
+.container .main .welcome {
+  margin-top: -400px;
+  display: flex;
+  flex-direction: column;
+}
+.container .main .welcome #choice-game-type {
+  background: linear-gradient(to left, #ff9696, yellow);
+  border-radius: 20px;
+  padding: 10px 10px;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.3rem;
+  gap: 5px;
+}
+.container .main .welcome #choice-game-type p {
+  margin: 0;
+  font-size: 1.5rem;
+}
+.container .main .welcome #choice-game-type > div {
+  display: flex;
+  justify-content: space-around;
+}
+.container .main .welcome #choice-single {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+.container .main .welcome #choice-single > div {
+  display: flex;
+  flex-direction: column;
+}
+.container .main .welcome #choice-single .btn-div {
+  width: 250px;
+  height: 40px;
+}
+.container .main .welcome #choice-single button {
+  border: none;
+  background-color: #251605;
+  color: #E3F2FD;
+  font-size: 1.5rem;
+}
+.container .main .welcome #choice-single button:hover {
+  box-shadow: 0 0 10px 5px #FA8334;
+  border: 1px solid #FA8334;
+  background-color: azure;
+  font-size: 2rem;
+  color: #251605;
+  font-weight: bold;
+}
 
 .fill-x {
   position: relative;
@@ -111,6 +162,19 @@
   background-color: #E3F2FD;
   border-radius: 50%;
   z-index: 1;
+}
+
+input {
+  border-radius: 5px;
+  border: 2px solid #FA8334;
+  padding: 0 10px;
+}
+input:focus {
+  outline: none;
+}
+
+.hidden {
+  display: none !important;
 }
 
 /*# sourceMappingURL=styles.css.map */
