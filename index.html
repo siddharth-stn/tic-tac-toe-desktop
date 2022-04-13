@@ -16,8 +16,10 @@
 <body>
     <div class="container">
         <div class="header"> Tic - Tac - Toe</div>
-        <div class="sideLeft"></div>
         <div class="main">
+            <div class="play-banner hidden">
+                <span>player one chance</span>
+            </div>
             <div class="welcome">
                 <form id="choice-game-type" class="">
                     <p>Select the type of game you want to play:<p/>
@@ -30,6 +32,9 @@
                                 <input type="radio" name="gameType" id="twoPlayer" class="form-check-input" value="2">
                                 <label for="twoPlayer">Two Players</label>
                             </div>
+                        </div>
+                        <div>
+                            <button type="button">Next</button>
                         </div>
                 </form>
                 <form id="choice-single" class="hidden">
@@ -75,6 +80,18 @@
                 <div class="cell9">
                     <div class=""></div>
                 </div>
+            </div>
+            <div class="win-banner hidden">
+                <div class="computerWin hidden">
+                    <p>Sorry, You Lost the Game</p>
+                </div>
+                <div class="playerOneWin hidden">
+                    <p>Horray! Player One Won the Game</p>
+                </div>
+                <div class="playerTwoWin hidden">
+                    <p>Horray! Player Two Won the Game</p>
+                </div>
+                <button class="btn btn-success">Play Again</button>
             </div>
         </div>
     </div>
