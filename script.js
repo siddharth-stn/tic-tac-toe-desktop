@@ -118,6 +118,13 @@ function gamePlay(event) {
             }, 800);
         }, 1000);
     }
+
+// write code if nonbody won
+// write code to show header banner messages 
+// write code to show to playernames in the banner messages 
+// write code for computer play
+// refactor code to make it more safe an unaccessible from the console
+
 }
 
 function disableCell(element) {
