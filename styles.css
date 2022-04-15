@@ -103,26 +103,26 @@
   background-color: black;
   color: white;
 }
-.container .main .welcome #choice-single {
+.container .main .welcome #enter-player-names {
   display: flex;
   flex-direction: column;
   row-gap: 20px;
 }
-.container .main .welcome #choice-single > div {
+.container .main .welcome #enter-player-names > div {
   display: flex;
   flex-direction: column;
 }
-.container .main .welcome #choice-single .btn-div {
+.container .main .welcome #enter-player-names .btn-div {
   width: 250px;
   height: 40px;
 }
-.container .main .welcome #choice-single button {
+.container .main .welcome #enter-player-names button {
   border: none;
   background-color: #251605;
   color: #E3F2FD;
   font-size: 1.5rem;
 }
-.container .main .welcome #choice-single button:hover {
+.container .main .welcome #enter-player-names button:hover {
   box-shadow: 0 0 10px 5px #FA8334;
   border: 1px solid #FA8334;
   background-color: azure;

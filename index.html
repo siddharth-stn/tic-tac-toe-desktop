@@ -17,7 +17,7 @@
     <div class="container">
         <div class="header"> Tic - Tac - Toe</div>
         <div class="main">
-            <div class="play-banner hidden">
+            <div class="play-banner">
                 <span>player one chance</span>
             </div>
             <div class="welcome">
@@ -34,50 +34,50 @@
                             </div>
                         </div>
                         <div>
-                            <button type="button">Next</button>
+                            <button type="button" class="nextBtn">Next</button>
                         </div>
                 </form>
-                <form id="choice-single" class="hidden animate__animated animate__fadeIn">
+                <form id="enter-player-names" class="hidden animate__animated animate__fadeIn">
                     <div>
                         <label for="playerOneName">Player One Name:</label>
-                        <input type="text" id="playerOneName">
+                        <input type="text" id="playerOneNameInput">
                     </div>
-                    <div>
-                        <label for="playerTwoName">Player Two Name:</label>
-                        <input type="text" id="playerTwoName">
+                    <div id="playerTwoName" class="hidden">
+                        <label for="playerTwoName" >Player Two Name:</label>
+                        <input type="text" id="playerTwoNameInput">
                     </div>
                     <div class="btn-div">
-                        <button type="button">Start Game</button>
+                        <button type="button" class="startBtn">Start Game</button>
                     </div>
                 </form>
                 
             </div>
-            <div class="play-grid hidden animate__animated animate__rotateIn">
-                <div class="cell1">
-                    <div class="fill-x"></div>
-                </div>
-                <div class="cell2">
-                    <div class="fill-o"></div>
-                </div>
-                <div class="cell3">
+            <div class="play-grid animate__animated animate__rotateIn">
+                <div class="cell cell1" data-cell="1">
                     <div class=""></div>
                 </div>
-                <div class="cell4">
+                <div class="cell cell2" data-cell="2">
                     <div class=""></div>
                 </div>
-                <div class="cell5">
+                <div class="cell cell3" data-cell="3">
                     <div class=""></div>
                 </div>
-                <div class="cell6">
+                <div class="cell cell4" data-cell="4">
                     <div class=""></div>
                 </div>
-                <div class="cell7">
+                <div class="cell cell5" data-cell="5">
                     <div class=""></div>
                 </div>
-                <div class="cell8">
+                <div class="cell cell6" data-cell="6">
                     <div class=""></div>
                 </div>
-                <div class="cell9">
+                <div class="cell cell7" data-cell="7">
+                    <div class=""></div>
+                </div>
+                <div class="cell cell8" data-cell="8">
+                    <div class=""></div>
+                </div>
+                <div class="cell cell9" data-cell="9">
                     <div class=""></div>
                 </div>
             </div>
@@ -86,12 +86,12 @@
                     <p>Sorry, You Lost the Game</p>
                 </div>
                 <div class="playerOneWin hidden">
-                    <p>Horray! Player One Won the Game</p>
+                    <p></p>
                 </div>
                 <div class="playerTwoWin hidden">
-                    <p>Horray! Player Two Won the Game</p>
+                    <p></p>
                 </div>
-                <button class="btn btn-success">Play Again</button>
+                <button class="btn btn-success animate__animated" onclick="document.location.reload(true)">Play Again</button>
             </div>
         </div>
     </div>
