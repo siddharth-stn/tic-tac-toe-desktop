@@ -11,7 +11,8 @@ const playBanner = document.querySelector(".play-banner");
 const winBanner = document.querySelector(".win-banner");
 const playerOneWin = document.querySelector(".playerOneWin");
 const playerTwoWin = document.querySelector(".playerTwoWin");
-
+const matchTie = document.querySelector(".match-tie");
+const playerChanceBanner = document.querySelector(".play-banner");
 
 let gameType;
 
@@ -47,6 +48,7 @@ let playerOneNameValue;
 let playerTwoNameValue;
 
 
+
 function onStartBtnClick(formPlayerName, playGrid) {
     // store the names of the players in the constants/variables
     const playerOneNameInput = document.querySelector("#playerOneNameInput");
@@ -54,11 +56,14 @@ function onStartBtnClick(formPlayerName, playGrid) {
     playerOneNameValue = playerOneNameInput.value;
     playerTwoNameValue = playerTwoNameInput.value;
 
+    (gameType == 1) ? (playerTwoNameValue = "Computer") : null;
+
     // add hidden class to enter-player-names form
     addHiddenClass(formPlayerName);
 
     // removehiddenclass from play-grid
     removeHiddenClass(playGrid);
+    playBanner.children[0].textContent = `${playerOneNameValue} click on the grid to Mark X in any cell and Start the game`;
     removeHiddenClass(playBanner);
 }
 
@@ -72,11 +77,14 @@ startButton.addEventListener('click', onStartBtnClick.bind(startButton, enterNam
 
 const gridArray = [];
 let playerChance = 1;
+let playTimes = 0;
 
 playGrid.addEventListener('click', gamePlay);
 
 
 function gamePlay(event) {
+    playTimes += 1;
+
     // identify the clicked cell 
     let clickedCell = identifyCell(event);
 
@@ -90,13 +98,30 @@ function gamePlay(event) {
     // change the playerChance value
     changePlayer(clickedCell);
 
+    // show player chance in head banner
+    showPlayerChance(playerChanceBanner, playerChance);
+
     // check if somebody won
     let won_Or_Not = whoWon_Or_Not();
     if (won_Or_Not == 0) {
+        // write code if its a tie
+        if (playTimes > 8) {
+            removeClickListener(playGrid);
+            removePlayerChanceBanner();
+            setTimeout(() => {
+                removeGrid();
+                show_WinBanner();
+                showMatchTie();
+                setTimeout(() => {
+                    document.querySelector(".btn-success").classList.add("animate__wobble")
+                }, 800);
+            }, 1000);
+        }
         return;
     } else if (won_Or_Not == 1) {
-        playerOneWin.children[0].textContent = "Horray! Player One Won the Game"
+        playerOneWin.children[0].textContent = `Horray! ${playerOneNameValue} Won the Game`;
         removeClickListener(playGrid);
+        removePlayerChanceBanner();
         setTimeout(() => {
             removeGrid();
             show_WinBanner();
@@ -105,10 +130,10 @@ function gamePlay(event) {
                 document.querySelector(".btn-success").classList.add("animate__wobble")
             }, 500); 
         }, 1000);
-
     } else if (won_Or_Not == 2) {
-        playerTwoWin.children[0].textContent = "Horray! Player Two Won the Game";
+        playerTwoWin.children[0].textContent = `Horray! ${playerTwoNameValue} Won the Game`;
         removeClickListener(playGrid);
+        removePlayerChanceBanner();
         setTimeout(() => {
             removeGrid();
             show_WinBanner();
@@ -119,11 +144,8 @@ function gamePlay(event) {
         }, 1000);
     }
 
-// write code if nonbody won
-// write code to show header banner messages 
-// write code to show to playernames in the banner messages 
 // write code for computer play
-// refactor code to make it more safe an unaccessible from the console
+// refactor code to make it more safe and unaccessible from the console
 
 }
 
@@ -155,6 +177,14 @@ function changePlayer(clickedCell) {
         return;
     }
     playerChance == 1 ? playerChance = 2 : playerChance = 1;
+}
+
+function showPlayerChance (element, playerChance) {
+    if (playerChance == 1) {
+        element.children[0].textContent = `make a move ${playerOneNameValue}`;
+    } else {
+        element.children[0].textContent = `make a move ${playerTwoNameValue}`;
+    }
 }
 
 
@@ -242,8 +272,16 @@ function showPlayeTwoWin() {
     removeHiddenClass(playerTwoWin);
 }
 
+function showMatchTie () {
+    removeHiddenClass(matchTie);
+}
+
 function removeGrid() {
     addHiddenClass(playGrid);
+}
+
+function removePlayerChanceBanner() {
+    addHiddenClass(playerChanceBanner);
 }
 
 function removeClickListener(element) {

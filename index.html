@@ -17,11 +17,11 @@
     <div class="container">
         <div class="header"> Tic - Tac - Toe</div>
         <div class="main">
-            <div class="play-banner">
+            <div class="play-banner hidden">
                 <span>player one chance</span>
             </div>
             <div class="welcome">
-                <form id="choice-game-type" class="hidden animate__animated animate__bounceInDown">
+                <form id="choice-game-type" class="animate__animated animate__bounceInDown">
                     <p>Select the type of game you want to play:<p/>
                         <div>
                             <div>
@@ -52,7 +52,7 @@
                 </form>
                 
             </div>
-            <div class="play-grid animate__animated animate__rotateIn">
+            <div class="play-grid hidden animate__animated animate__rotateIn">
                 <div class="cell cell1" data-cell="1">
                     <div class=""></div>
                 </div>
@@ -90,6 +90,9 @@
                 </div>
                 <div class="playerTwoWin hidden">
                     <p></p>
+                </div>
+                <div class="match-tie hidden">
+                    <p>wohooo! it's a tie</p>
                 </div>
                 <button class="btn btn-success animate__animated" onclick="document.location.reload(true)">Play Again</button>
             </div>
