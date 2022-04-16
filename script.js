@@ -83,10 +83,14 @@ playGrid.addEventListener('click', gamePlay);
 
 
 function gamePlay(event) {
-    playTimes += 1;
-
     // identify the clicked cell 
     let clickedCell = identifyCell(event);
+
+    // increase the chance number by one if correct cell was clicked 
+    if (clickedCell != false) {
+        playTimes += 1;
+    }
+
 
     // if playerOne clicked then add class fill-x and if, 
     // playerTwo clicked then add class fill-o to the identified cell
@@ -100,6 +104,10 @@ function gamePlay(event) {
 
     // show player chance in head banner
     showPlayerChance(playerChanceBanner, playerChance);
+
+    if (clickedCell != false) {
+        log(computerPlay(gridArray, clickedCell));
+    }
 
     // check if somebody won
     let won_Or_Not = whoWon_Or_Not();
@@ -286,4 +294,80 @@ function removePlayerChanceBanner() {
 
 function removeClickListener(element) {
     element.removeEventListener('click', gamePlay);
+}
+
+function computerPlay (grid, clickedCell) {
+    let position = Number(clickedCell.getAttribute("data-cell"));
+
+    let selectionPositions;
+
+    switch (position) {
+        case 1:
+            selectionPositions = [2,4,5];
+            break;
+        case 2:
+            selectionPositions =[1,3,4,5,6];
+            break;
+        case 3:
+            selectionPositions = [2,5,6];
+            break;
+        case 4:
+            selectionPositions = [1,2,5,7,8];        
+            break;
+        case 5:
+            selectionPositions = [1,2,3,4,6,7,8,9];
+            break;
+        case 6:
+            selectionPositions = [2,3,5,8,9];
+            break;
+        case 7:
+            selectionPositions = [4,5,8];
+            break;
+        case 8:
+            selectionPositions = [4,5,6,7,9];
+            break;
+        case 9:
+            selectionPositions = [5,6,8];
+            break;                    
+        default:
+            log("I was run");
+            break;
+    }
+
+    let finalSelectionPositions = removeElements (selectionPositions, grid);
+
+    return computerChoiceCell(finalSelectionPositions, grid);
+
+}
+
+function removeElements (array, grid) {
+    let finalArray = array.filter((value) => {
+        if (grid[value-1] == undefined) {
+            return value;
+        }
+    });
+
+    if (finalArray.length != 0){
+        return finalArray;
+    }
+    
+    return false;
+}
+
+function computerChoiceCell (finalChoiceArr, grid) {
+    let finalChoice;
+    if (finalChoiceArr == false) {
+        finalChoice = grid.filter((value, index) => {
+            if (value == undefined ) {
+                return index;
+            }
+        });
+        return finalChoice[0];
+    }
+
+
+    let length = finalChoiceArr.length;
+    let choice = Math.floor((Math.random() * length) + 1);
+    finalChoice = finalChoiceArr[choice-1];
+    return finalChoice;
 }
