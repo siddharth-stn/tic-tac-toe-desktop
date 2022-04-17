@@ -59,7 +59,7 @@ const playerChanceBanner = document.querySelector(".play-banner");
         const playerOneNameInput = document.querySelector("#playerOneNameInput");
         const playerTwoNameInput = document.querySelector("#playerTwoNameInput");
         playerOneNameValue = playerOneNameInput.value == "" ? "Player One" : playerOneNameInput.value;
-        playerTwoNameValue = playerTwoNameInput.value == "" ? "Player Two" : playerOneNameInput.value;
+        playerTwoNameValue = playerTwoNameInput.value == "" ? "Player Two" : playerTwoNameInput.value;
 
         (gameType == 1) ? (playerTwoNameValue = "Computer") : null;
 
@@ -336,6 +336,8 @@ const playerChanceBanner = document.querySelector(".play-banner");
                 playTimes += 1;
                 playGrid.addEventListener('click', gamePlay);
             }, 1000);
+        } else {
+            playGrid.addEventListener('click', gamePlay);
         }
     }
 
