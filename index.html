@@ -21,11 +21,13 @@
                 <span>player one chance</span>
             </div>
             <div class="welcome">
-                <form id="choice-game-type" class="hidden animate__animated animate__bounceInDown">
-                    <p>Select the type of game you want to play:<p/>
+                <form id="choice-game-type" class="animate__animated animate__bounceInDown">
+                    <p>Select the type of game you want to play:
+                        <p />
                         <div>
                             <div>
-                                <input type="radio" name="gameType" id="singlePlayer" class="form-check-input" value="1" checked>
+                                <input type="radio" name="gameType" id="singlePlayer" class="form-check-input" value="1"
+                                    checked>
                                 <label for="singlePlayer">Single Player</label>
                             </div>
                             <div>
@@ -43,16 +45,16 @@
                         <input type="text" id="playerOneNameInput">
                     </div>
                     <div id="playerTwoName" class="hidden">
-                        <label for="playerTwoName" >Player Two Name:</label>
+                        <label for="playerTwoName">Player Two Name:</label>
                         <input type="text" id="playerTwoNameInput">
                     </div>
                     <div class="btn-div">
                         <button type="button" class="startBtn">Start Game</button>
                     </div>
                 </form>
-                
+
             </div>
-            <div class="play-grid animate__animated animate__rotateIn">
+            <div class="play-grid hidden animate__animated animate__rotateIn">
                 <div class="cell cell1" data-cell="1">
                     <div class=""></div>
                 </div>
@@ -94,7 +96,8 @@
                 <div class="match-tie hidden">
                     <p>wohooo! it's a tie</p>
                 </div>
-                <button class="btn btn-success animate__animated" onclick="document.location.reload(true)">Play Again</button>
+                <button class="btn btn-success animate__animated" onclick="document.location.reload(true)">Play
+                    Again</button>
             </div>
         </div>
     </div>

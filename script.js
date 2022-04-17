@@ -53,7 +53,7 @@ function onStartBtnClick(formPlayerName, playGrid) {
     // store the names of the players in the constants/variables
     const playerOneNameInput = document.querySelector("#playerOneNameInput");
     const playerTwoNameInput = document.querySelector("#playerTwoNameInput");
-    playerOneNameValue = playerOneNameInput.value;
+    playerOneNameValue = playerOneNameInput.value == "" ? "Player One" : playerOneNameInput.value;
     playerTwoNameValue = playerTwoNameInput.value;
 
     (gameType == 1) ? (playerTwoNameValue = "Computer") : null;
@@ -87,10 +87,11 @@ function gamePlay(event) {
     let clickedCell = identifyCell(event);
 
     // increase the chance number by one if correct cell was clicked 
-    if (clickedCell != false) {
-        playTimes += 1;
+    if (clickedCell == false) {
+        return;
     }
 
+    playTimes += 1;
 
     // if playerOne clicked then add class fill-x and if, 
     // playerTwo clicked then add class fill-o to the identified cell
@@ -100,16 +101,71 @@ function gamePlay(event) {
     updateGridArray(clickedCell, playerChance);
 
     // change the playerChance value
-    changePlayer(clickedCell);
+    changePlayer();
 
     // show player chance in head banner
     showPlayerChance(playerChanceBanner, playerChance);
 
-    if (clickedCell != false) {
-        log(computerPlay(gridArray, clickedCell));
-    }
+    // check Winner
+    checkWin();
 
-    // check if somebody won
+    // if single player game then computer will play
+    computerPlayedchance(gridArray, clickedCell);
+
+    // refactor code to make it more safe and unaccessible from the console
+}
+
+function disableCell(element) {
+    element.classList.remove("cell");
+}
+
+function identifyCell(event) {
+    if (Array.from(event.target.classList).includes("cell")) {
+        disableCell(event.target);
+        return event.target;
+    }
+    return false;
+}
+
+function fill_X_OR_O(clickedCell) {
+    if (clickedCell == false) {
+        return;
+    }
+    if (playerChance == 1) {
+        clickedCell.children[0].classList.add("fill-x");
+    } else {
+        clickedCell.children[0].classList.add("fill-o");
+    }
+}
+
+function changePlayer() {
+    playerChance == 1 ? playerChance = 2 : playerChance = 1;
+}
+
+function showPlayerChance(element, playerChance) {
+    if (playerChance == 1) {
+        element.children[0].textContent = `make a move ${playerOneNameValue}`;
+    } else {
+        element.children[0].textContent = `make a move ${playerTwoNameValue}`;
+    }
+}
+
+
+function updateGridArray(clickedCell, playerChance) {
+    if (clickedCell == false) {
+        return;
+    }
+    let clickedCellIndex = clickedCell.getAttribute("data-cell");
+
+    if (playerChance == 1) {
+        gridArray[clickedCellIndex - 1] = "X";
+    } else {
+        gridArray[clickedCellIndex - 1] = "O";
+    }
+}
+
+// check if somebody won
+function checkWin() {
     let won_Or_Not = whoWon_Or_Not();
     if (won_Or_Not == 0) {
         // write code if its a tie
@@ -136,7 +192,7 @@ function gamePlay(event) {
             showPlayeOneWin();
             setTimeout(() => {
                 document.querySelector(".btn-success").classList.add("animate__wobble")
-            }, 500); 
+            }, 500);
         }, 1000);
     } else if (won_Or_Not == 2) {
         playerTwoWin.children[0].textContent = `Horray! ${playerTwoNameValue} Won the Game`;
@@ -152,61 +208,6 @@ function gamePlay(event) {
         }, 1000);
     }
 
-// write code for computer play
-// refactor code to make it more safe and unaccessible from the console
-
-}
-
-function disableCell(element) {
-    element.classList.remove("cell");
-}
-
-function identifyCell(event) {
-    if (Array.from(event.target.classList).includes("cell")) {
-        disableCell(event.target);
-        return event.target;
-    }
-    return false;
-}
-
-function fill_X_OR_O(clickedCell) {
-    if (clickedCell == false) {
-        return;
-    }
-    if (playerChance == 1) {
-        clickedCell.children[0].classList.add("fill-x");
-    } else {
-        clickedCell.children[0].classList.add("fill-o");
-    }
-}
-
-function changePlayer(clickedCell) {
-    if (clickedCell == false) {
-        return;
-    }
-    playerChance == 1 ? playerChance = 2 : playerChance = 1;
-}
-
-function showPlayerChance (element, playerChance) {
-    if (playerChance == 1) {
-        element.children[0].textContent = `make a move ${playerOneNameValue}`;
-    } else {
-        element.children[0].textContent = `make a move ${playerTwoNameValue}`;
-    }
-}
-
-
-function updateGridArray(clickedCell, playerChance) {
-    if (clickedCell == false) {
-        return;
-    }
-    let clickedCellIndex = clickedCell.getAttribute("data-cell");
-
-    if (playerChance == 1) {
-        gridArray[clickedCellIndex - 1] = "X";
-    } else {
-        gridArray[clickedCellIndex - 1] = "O";
-    }
 }
 
 function whoWon_Or_Not() {
@@ -280,7 +281,7 @@ function showPlayeTwoWin() {
     removeHiddenClass(playerTwoWin);
 }
 
-function showMatchTie () {
+function showMatchTie() {
     removeHiddenClass(matchTie);
 }
 
@@ -296,78 +297,103 @@ function removeClickListener(element) {
     element.removeEventListener('click', gamePlay);
 }
 
-function computerPlay (grid, clickedCell) {
+
+// write code for computer play
+function computerPlayedchance(gridArray, clickedCell) {
+    if (gameType == 1) {
+        removeClickListener(playGrid);
+        let computerChoice = computerPlay(gridArray, clickedCell);
+        let chosenCell = document.querySelector(`[data-cell="${computerChoice}"]`);
+        disableCell(chosenCell); // to remove class cell from the chosen cell 
+        setTimeout(() => {
+            try {
+                fill_X_OR_O(chosenCell);
+                updateGridArray(chosenCell, playerChance);
+                changePlayer();
+                showPlayerChance(playerChanceBanner, playerChance);
+                checkWin(); // check winner
+            } catch {}
+            playTimes += 1;
+        }, 1000);
+        setTimeout(() => {
+            playGrid.addEventListener('click', gamePlay);
+        }, 500);
+    }
+}
+
+
+
+function computerPlay(grid, clickedCell) {
     let position = Number(clickedCell.getAttribute("data-cell"));
 
     let selectionPositions;
 
     switch (position) {
         case 1:
-            selectionPositions = [2,4,5];
+            selectionPositions = [2, 4, 5];
             break;
         case 2:
-            selectionPositions =[1,3,4,5,6];
+            selectionPositions = [1, 3, 4, 5, 6];
             break;
         case 3:
-            selectionPositions = [2,5,6];
+            selectionPositions = [2, 5, 6];
             break;
         case 4:
-            selectionPositions = [1,2,5,7,8];        
+            selectionPositions = [1, 2, 5, 7, 8];
             break;
         case 5:
-            selectionPositions = [1,2,3,4,6,7,8,9];
+            selectionPositions = [1, 2, 3, 4, 6, 7, 8, 9];
             break;
         case 6:
-            selectionPositions = [2,3,5,8,9];
+            selectionPositions = [2, 3, 5, 8, 9];
             break;
         case 7:
-            selectionPositions = [4,5,8];
+            selectionPositions = [4, 5, 8];
             break;
         case 8:
-            selectionPositions = [4,5,6,7,9];
+            selectionPositions = [4, 5, 6, 7, 9];
             break;
         case 9:
-            selectionPositions = [5,6,8];
-            break;                    
+            selectionPositions = [5, 6, 8];
+            break;
         default:
             log("I was run");
             break;
     }
 
-    let finalSelectionPositions = removeElements (selectionPositions, grid);
+    let finalSelectionPositions = removeElements(selectionPositions, grid);
 
     return computerChoiceCell(finalSelectionPositions, grid);
 
 }
 
-function removeElements (array, grid) {
+function removeElements(array, grid) {
     let finalArray = array.filter((value) => {
-        if (grid[value-1] == undefined) {
+        if (grid[value - 1] == undefined) {
             return value;
         }
     });
 
-    if (finalArray.length != 0){
+    if (finalArray.length != 0) {
         return finalArray;
     }
-    
+
     return false;
 }
 
-function computerChoiceCell (finalChoiceArr, grid) {
+function computerChoiceCell(finalChoiceArr, grid) {
     let finalChoice;
     if (finalChoiceArr == false) {
-        finalChoice = grid.filter((value, index) => {
-            if (value == undefined ) {
-                return index;
+        for (let index = 0; index < grid.length; index++) {
+            const element = grid[index];
+            if (element == undefined) {
+                return (index + 1);
             }
-        });
-        return finalChoice[0];
+        }
     }
-
 
     let length = finalChoiceArr.length;
     let choice = Math.floor((Math.random() * length) + 1);
-    finalChoice = finalChoiceArr[choice-1];
+    finalChoice = finalChoiceArr[choice - 1];
     return finalChoice;
 }
