@@ -83,8 +83,7 @@ const playerChanceBanner = document.querySelector(".play-banner");
     const gridArray = [];
     let playerChance = 1;
     let playTimes = 0;
-    let times = 0;
-
+    let play = true;
 
     playGrid.addEventListener('click', gamePlay);
 
@@ -96,7 +95,7 @@ const playerChanceBanner = document.querySelector(".play-banner");
         let clickedCell = identifyCell(event);
 
         // increase the chance number by one if correct cell was clicked 
-        if (clickedCell == false) {
+        if (clickedCell == false && play == true) {
             playGrid.addEventListener('click', gamePlay); // to add event listener if user clicks on the already clicked cell
             return;
         }
@@ -195,6 +194,7 @@ const playerChanceBanner = document.querySelector(".play-banner");
             }
             return;
         } else if (won_Or_Not == 1) {
+            play = false;
             tweetSound.pause();
             tweetSound.currentTime = 0;
             winSound.play();
@@ -210,6 +210,7 @@ const playerChanceBanner = document.querySelector(".play-banner");
                 }, 500);
             }, 1000);
         } else if (won_Or_Not == 2) {
+            play = false;
             tweetSound.pause();
             tweetSound.currentTime = 0;
             winSound.play();
@@ -336,7 +337,7 @@ const playerChanceBanner = document.querySelector(".play-banner");
                 playTimes += 1;
                 playGrid.addEventListener('click', gamePlay);
             }, 1000);
-        } else {
+        } else if (play == true) {
             playGrid.addEventListener('click', gamePlay);
         }
     }
