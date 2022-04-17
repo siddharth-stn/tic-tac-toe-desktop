@@ -15,7 +15,13 @@ const playerChanceBanner = document.querySelector(".play-banner");
 (() => {
     let gameType;
 
+    let clickSound = new Audio("./static/clickSound.mp3");
+    let winSound = new Audio("./static/cheerSound.mp3");
+    let tieSound = new Audio("./static/drawSound.mp3");
+    let tweetSound = new Audio("./static/tweetSound.mp3");
+
     function onNextBtnClick(formGameType, formPlayerName) {
+        clickSound.play();
         gameTypeChoice();
         addHiddenClass(formGameType);
         removeHiddenClass(formPlayerName);
@@ -48,6 +54,7 @@ const playerChanceBanner = document.querySelector(".play-banner");
 
 
     function onStartBtnClick(formPlayerName, playGrid) {
+        clickSound.play();
         // store the names of the players in the constants/variables
         const playerOneNameInput = document.querySelector("#playerOneNameInput");
         const playerTwoNameInput = document.querySelector("#playerTwoNameInput");
@@ -76,16 +83,21 @@ const playerChanceBanner = document.querySelector(".play-banner");
     const gridArray = [];
     let playerChance = 1;
     let playTimes = 0;
+    let times = 0;
+
 
     playGrid.addEventListener('click', gamePlay);
 
 
     function gamePlay(event) {
+        playGrid.removeEventListener('click', gamePlay);
+
         // identify the clicked cell 
         let clickedCell = identifyCell(event);
 
         // increase the chance number by one if correct cell was clicked 
         if (clickedCell == false) {
+            playGrid.addEventListener('click', gamePlay); // to add event listener if user clicks on the already clicked cell
             return;
         }
 
@@ -119,6 +131,7 @@ const playerChanceBanner = document.querySelector(".play-banner");
 
     function identifyCell(event) {
         if (Array.from(event.target.classList).includes("cell")) {
+            clickSound.play();
             disableCell(event.target);
             return event.target;
         }
@@ -168,6 +181,7 @@ const playerChanceBanner = document.querySelector(".play-banner");
         if (won_Or_Not == 0) {
             // write code if its a tie
             if (playTimes > 8) {
+                tieSound.play();
                 removeClickListener(playGrid);
                 removePlayerChanceBanner();
                 setTimeout(() => {
@@ -181,6 +195,9 @@ const playerChanceBanner = document.querySelector(".play-banner");
             }
             return;
         } else if (won_Or_Not == 1) {
+            tweetSound.pause();
+            tweetSound.currentTime = 0;
+            winSound.play();
             playerOneWin.children[0].textContent = `Horray! ${playerOneNameValue} Won the Game`;
             removeClickListener(playGrid);
             removePlayerChanceBanner();
@@ -193,6 +210,9 @@ const playerChanceBanner = document.querySelector(".play-banner");
                 }, 500);
             }, 1000);
         } else if (won_Or_Not == 2) {
+            tweetSound.pause();
+            tweetSound.currentTime = 0;
+            winSound.play();
             playerTwoWin.children[0].textContent = `Horray! ${playerTwoNameValue} Won the Game`;
             removeClickListener(playGrid);
             removePlayerChanceBanner();
@@ -232,7 +252,6 @@ const playerChanceBanner = document.querySelector(".play-banner");
                 return 2;
             }
         } else if (cellSeven != undefined && cellSeven == cellEight && cellSeven == cellNine) {
-            log(cellFour, cellFive, cellSix)
             if (cellSeven == "X") {
                 return 1;
             } else {
@@ -299,23 +318,24 @@ const playerChanceBanner = document.querySelector(".play-banner");
     // write code for computer play
     function computerPlayedchance(gridArray, clickedCell) {
         if (gameType == 1) {
-            removeClickListener(playGrid);
+
             let computerChoice = computerPlay(gridArray, clickedCell);
             let chosenCell = document.querySelector(`[data-cell="${computerChoice}"]`);
-            disableCell(chosenCell); // to remove class cell from the chosen cell 
+            try {
+                disableCell(chosenCell); // to remove class cell from the chosen cell 
+            } catch {}
             setTimeout(() => {
                 try {
                     fill_X_OR_O(chosenCell);
+                    tweetSound.play();
                     updateGridArray(chosenCell, playerChance);
                     changePlayer();
                     showPlayerChance(playerChanceBanner, playerChance);
                     checkWin(); // check winner
                 } catch {}
                 playTimes += 1;
-            }, 1000);
-            setTimeout(() => {
                 playGrid.addEventListener('click', gamePlay);
-            }, 500);
+            }, 1000);
         }
     }
 
@@ -353,9 +373,6 @@ const playerChanceBanner = document.querySelector(".play-banner");
                 break;
             case 9:
                 selectionPositions = [5, 6, 8];
-                break;
-            default:
-                log("I was run");
                 break;
         }
 
